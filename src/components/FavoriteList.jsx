@@ -5,18 +5,25 @@ import Character from "./Character";
 import Empty from "./Empty";
 
 const FavoriteList = (props) => {
-    const { favoriteCharacters } = props;
+  const { favoriteCharacters } = props;
 
-    return(
-        
-    );
-
+  return (
+    <div className="characterList">
+      {!favoriteCharacters.length ? (
+        <Empty />
+      ) : (
+        favoriteCharacters.map((character) => (
+          <Character key={character.data.id} data={character.data} />
+        ))
+      )}
+    </div>
+  );
 };
 
 //native react-redux functions vs hoots: UseSelect & UseDispatch
-const mapStateToprops = (state) => {
-    return{
-        favoriteCharacters: state.favoriteCharacters,
-    };
-}
-export default connect(mapStateToprops, null)(FavoriteList);
+const mapStateToProps = (state) => {
+  return {
+    favoriteCharacters: state.favoriteCharacters,
+  };
+};
+export default connect(mapStateToProps, null)(FavoriteList);
